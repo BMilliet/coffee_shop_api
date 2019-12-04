@@ -28,9 +28,9 @@ def allCoffees():
 
 
 @app.route('/coffees/<int:type>', methods=['GET'])
-def coffeesByType(coffeeType):
+def coffeesByType(type):
     coffee_list = [
-        coffee for coffee in coffees if coffee['type'] == coffeeType
+        coffee for coffee in coffees if coffee['type'] == type
     ]
     return jsonify(coffee_list), 200
 

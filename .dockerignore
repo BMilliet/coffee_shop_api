@@ -10,3 +10,5 @@ vendor/bundle*
 modules/*
 docker-compose.yml
 .DS_Store
+.vscode/
+__pycache__/

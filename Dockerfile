@@ -9,4 +9,4 @@ RUN apt update \
 	&& pip --no-cache-dir install -r requirements.txt
 
 COPY . /app
-CMD ["python", "app.py"]
+CMD ["python", "run.py"]

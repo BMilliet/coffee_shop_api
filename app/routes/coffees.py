@@ -14,6 +14,11 @@ def index() -> str:
     return json.dumps({'coffees': controller.all_coffees()})
 
 
+@app.route('/CoffeeId/<int:coffee_id>')
+def coffee_by_id(coffee_id) -> str:
+    return json.dumps({'coffee': controller.coffees_id(coffee_id)})
+
+
 @app.route('/hello')
 def hello():
     return 'Hello World!'

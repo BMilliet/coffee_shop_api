@@ -31,7 +31,25 @@ def all_coffees() -> List[Dict]:
     connection = mysql.connector.connect(**config)
     cursor = connection.cursor()
     cursor.execute('SELECT * FROM coffees')
-    results = [{name: description} for (name, description) in cursor]
+    results = [{
+        name: description,
+        id: id
+    } for (name, description, id) in cursor]
+    cursor.close()
+    connection.close()
+
+    return results
+
+
+def coffees_id(id) -> List[Dict]:
+    config = db_config()
+    connection = mysql.connector.connect(**config)
+    cursor = connection.cursor()
+    cursor.execute('SELECT * FROM coffees where id= ' + str(id))
+    results = [{
+        name: description,
+        id: id
+    } for (name, description, id) in cursor]
     cursor.close()
     connection.close()
 

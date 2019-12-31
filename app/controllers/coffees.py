@@ -1,6 +1,7 @@
 from app import app
 from typing import List, Dict
 from flask import jsonify
+from app.services import db_manager, db_query
 import mysql.connector
 import json
 
@@ -15,42 +16,11 @@ def api_info() -> Dict:
     return info
 
 
-def db_config() -> Dict:
-    config = {
-        'user': 'root',
-        'password': 'root',
-        'host': 'db',
-        'port': '3306',
-        'database': 'coffee_db'
-    }
-    return config
-
-
 def all_coffees() -> List[Dict]:
-    config = db_config()
-    connection = mysql.connector.connect(**config)
-    cursor = connection.cursor()
-    cursor.execute('SELECT * FROM coffees')
-    results = [{
-        name: description,
-        id: id
-    } for (name, description, id) in cursor]
-    cursor.close()
-    connection.close()
-
+    results = db_manager.executeDBQuery(db_query.SELECTALL)
     return results
 
 
 def coffees_id(id) -> List[Dict]:
-    config = db_config()
-    connection = mysql.connector.connect(**config)
-    cursor = connection.cursor()
-    cursor.execute('SELECT * FROM coffees where id= ' + str(id))
-    results = [{
-        name: description,
-        id: id
-    } for (name, description, id) in cursor]
-    cursor.close()
-    connection.close()
-
+    results = db_manager.executeDBQuery(db_query.SELECTWHEREID + str(id))
     return results

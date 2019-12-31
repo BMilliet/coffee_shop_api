@@ -1,7 +1,7 @@
-CREATE DATABASE coffee_db;
+CREATE DATABASE IF NOT EXISTS coffee_db;
 use coffee_db;
 
-CREATE TABLE coffees (
+CREATE TABLE IF NOT EXISTS coffees (
   name VARCHAR(20),
   description VARCHAR(255)
 );

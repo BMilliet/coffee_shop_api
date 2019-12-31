@@ -4,15 +4,18 @@ from flask import jsonify
 import mysql.connector
 import json
 
-info = {
-    'name':
-    'Coffee shop Api',
-    'description':
-    'Welcome to the Coffee shop! This is an Api made in Python 3 with Falsk'
-}
+
+def api_info() -> Dict:
+    info = {
+        'name':
+        'Coffee shop Api',
+        'description':
+        'Welcome to the Coffee shop! This is an Api made in Python 3 with Falsk'
+    }
+    return info
 
 
-def all_coffees() -> List[Dict]:
+def db_config() -> Dict:
     config = {
         'user': 'root',
         'password': 'root',
@@ -20,6 +23,11 @@ def all_coffees() -> List[Dict]:
         'port': '3306',
         'database': 'coffee_db'
     }
+    return config
+
+
+def all_coffees() -> List[Dict]:
+    config = db_config()
     connection = mysql.connector.connect(**config)
     cursor = connection.cursor()
     cursor.execute('SELECT * FROM coffees')
@@ -28,18 +36,3 @@ def all_coffees() -> List[Dict]:
     connection.close()
 
     return results
-
-
-@app.route('/', methods=['GET'])
-def welcome():
-    return jsonify(info), 200
-
-
-@app.route('/allCoffees')
-def index() -> str:
-    return json.dumps({'coffees': all_coffees()})
-
-
-@app.route('/hello')
-def hello():
-    return 'Hello World!'

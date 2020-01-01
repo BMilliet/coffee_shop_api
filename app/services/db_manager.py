@@ -4,6 +4,28 @@ import mysql.connector
 import json
 
 
+def dbChange(query, cursor, connection) -> None:
+    cursor.execute(query)
+    connection.commit()
+    return None
+
+
+def dbQuery(query, cursor, connection) -> List[Dict]:
+    cursor.execute(query)
+    results = resultFormat(cursor)
+    return results
+
+
+def requestDB(callback, query) -> List[Dict]:
+    config = db_config()
+    connection = mysql.connector.connect(**config)
+    cursor = connection.cursor()
+    result = callback(query, cursor, connection)
+    cursor.close()
+    connection.close()
+    return result
+
+
 def resultFormat(cursor) -> List[Dict]:
     resultFormat = [{
         'name': name,
@@ -11,37 +33,6 @@ def resultFormat(cursor) -> List[Dict]:
         'id': id
     } for (id, name, description) in cursor]
     return resultFormat
-
-
-def requestDBChange(query) -> None:
-    config = db_config()
-    connection = mysql.connector.connect(**config)
-    cursor = connection.cursor()
-    cursor.execute(query)
-    connection.commit()
-    cursor.close()
-    connection.close()
-    return None
-
-
-def executeDBQuery(query) -> List[Dict]:
-    config = db_config()
-    connection = mysql.connector.connect(**config)
-    cursor = connection.cursor()
-    cursor.execute(query)
-    results = resultFormat(cursor)
-    cursor.close()
-    connection.close()
-    return results
-
-
-def requestDB(query, callback) -> None:
-    config = db_config()
-    connection = mysql.connector.connect(**config)
-    cursor = connection.cursor()
-    callback(cursor, connection)
-    cursor.close()
-    connection.close()
 
 
 def db_config() -> Dict:

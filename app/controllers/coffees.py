@@ -17,15 +17,16 @@ def api_info() -> Dict:
 
 
 def all_coffees() -> List[Dict]:
-    results = db_manager.executeDBQuery(db_query.SELECTALL)
+    results = db_manager.requestDB(db_manager.dbQuery, db_query.SELECTALL)
     return results
 
 
 def coffees_id(id) -> List[Dict]:
-    results = db_manager.executeDBQuery(db_query.SELECTWHEREID + str(id))
+    results = db_manager.requestDB(db_manager.dbQuery,
+                                   db_query.SELECTWHEREID + str(id))
     return results
 
 
 def delete_from_id(id) -> str:
-    db_manager.requestDBChange(db_query.DELETEWHEREID + str(id))
+    db_manager.requestDB(db_manager.dbChange, db_query.DELETEWHEREID + str(id))
     return 'delete coffee with id ' + str(id)

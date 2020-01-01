@@ -1,10 +1,7 @@
-from app import app
 from typing import List, Dict
-from flask import jsonify, request
+from flask import request
 from app.models import coffee
 from app.services import db_manager, query_manager
-import mysql.connector
-import json
 
 
 def api_info() -> Dict:

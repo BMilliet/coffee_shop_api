@@ -1,7 +1,5 @@
 from typing import List, Dict
-from flask import jsonify
 import mysql.connector
-import json
 
 
 def dbChange(query, cursor, connection) -> None:

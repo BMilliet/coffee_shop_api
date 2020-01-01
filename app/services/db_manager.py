@@ -6,10 +6,22 @@ import json
 
 def resultFormat(cursor) -> List[Dict]:
     resultFormat = [{
-        name: description,
-        id: id
-    } for (name, description, id) in cursor]
+        'name': name,
+        'description': description,
+        'id': id
+    } for (id, name, description) in cursor]
     return resultFormat
+
+
+def requestDBChange(query) -> None:
+    config = db_config()
+    connection = mysql.connector.connect(**config)
+    cursor = connection.cursor()
+    cursor.execute(query)
+    connection.commit()
+    cursor.close()
+    connection.close()
+    return None
 
 
 def executeDBQuery(query) -> List[Dict]:
@@ -20,8 +32,16 @@ def executeDBQuery(query) -> List[Dict]:
     results = resultFormat(cursor)
     cursor.close()
     connection.close()
-
     return results
+
+
+def requestDB(query, callback) -> None:
+    config = db_config()
+    connection = mysql.connector.connect(**config)
+    cursor = connection.cursor()
+    callback(cursor, connection)
+    cursor.close()
+    connection.close()
 
 
 def db_config() -> Dict:

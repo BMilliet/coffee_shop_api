@@ -9,16 +9,21 @@ def welcome():
     return jsonify(controller.api_info()), 200
 
 
+@app.route('/hello')
+def hello():
+    return 'Hello World!'
+
+
 @app.route('/allCoffees')
 def index() -> str:
-    return json.dumps({'coffees': controller.all_coffees()})
+    return json.dumps({'results': controller.all_coffees()})
 
 
 @app.route('/CoffeeId/<int:coffee_id>')
 def coffee_by_id(coffee_id) -> str:
-    return json.dumps({'coffee': controller.coffees_id(coffee_id)})
+    return json.dumps({'result': controller.coffees_id(coffee_id)})
 
 
-@app.route('/hello')
-def hello():
-    return 'Hello World!'
+@app.route('/DeleteWhereId/<int:coffee_id>')
+def delete_where_id(coffee_id) -> str:
+    return json.dumps({'result': controller.delete_from_id(coffee_id)})

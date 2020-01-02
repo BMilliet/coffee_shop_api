@@ -1,29 +1,24 @@
-from typing import List, Dict
 from flask import request
 from app.models import coffee
+from app.support import app_strings
 from app.services import db_manager, query_manager
+import json
 
 
-def api_info() -> Dict:
-    info = {
-        'name':
-        'Coffee shop Api',
-        'description':
-        'Welcome to the Coffee shop! This is an Api made in Python 3 with Flask'
-    }
-    return info
+def api_info() -> str:
+    return jsonify(app_strings.api_info())
 
 
-def all_coffees() -> List[Dict]:
+def all_coffees() -> str:
     query = query_manager.select_all()
     results = db_manager.requestDB(db_manager.dbQuery, query)
-    return results
+    return json.dumps({'results': results})
 
 
-def coffees_id(id) -> List[Dict]:
+def coffees_id(id) -> str:
     query = query_manager.select_where(str(id))
     results = db_manager.requestDB(db_manager.dbQuery, query)
-    return results
+    return json.dumps({'result': results})
 
 
 def delete_from_id(id) -> str:

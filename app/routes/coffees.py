@@ -14,7 +14,7 @@ def hello() -> str:
 
 @app.route('/allCoffees', methods=['GET'])
 def index() -> str:
-    return ontroller.all_coffees()
+    return controller.all_coffees()
 
 
 @app.route('/CoffeeId/<int:coffee_id>', methods=['GET'])

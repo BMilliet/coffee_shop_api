@@ -33,4 +33,8 @@ def insert_item() -> str:
     values = coffee_object.to_db_values()
     query = query_manager.insert_new(values)
     db_manager.requestDB(db_manager.dbChange, query)
-    return 'added new coffee'
+    result = {
+        'status': 'new coffee added',
+        'coffee': coffee_object.represent()
+    }
+    return json.dumps(result)

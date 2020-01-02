@@ -14,3 +14,7 @@ class Coffee:
     def to_db_values(self) -> str:
         return "(DEFAULT, '{name}', '{desc}')".format(name=self.name,
                                                       desc=self.description)
+
+    def represent(self) -> str:
+        value = {'name': self.name, 'description': self.description}
+        return value

@@ -1,5 +1,5 @@
 from typing import List, Dict
-import mysql.connector
+import psycopg2
 
 
 def dbChange(query, cursor, connection) -> None:
@@ -16,7 +16,7 @@ def dbQuery(query, cursor, connection) -> List[Dict]:
 
 def requestDB(callback, query) -> List[Dict]:
     config = db_config()
-    connection = mysql.connector.connect(**config)
+    connection = psycopg2.connect(**config)
     cursor = connection.cursor()
     result = callback(query, cursor, connection)
     cursor.close()
@@ -35,10 +35,9 @@ def resultFormat(cursor) -> List[Dict]:
 
 def db_config() -> Dict:
     config = {
-        'user': 'root',
+        'user': 'postgres',
         'password': 'root',
         'host': 'db',
-        'port': '3306',
         'database': 'coffee_db'
     }
     return config

@@ -5,16 +5,16 @@ services:
     build: .
     volumes:
       - .:/app
-    links:
-      - db
     ports:
       - 5000:5000
+    depends_on:
+      - db
 
   db:
-    image: mysql:5.7
+    image: postgres
     ports:
-      - "32000:3306"
+      - 5432:5432
     environment:
-      MYSQL_ROOT_PASSWORD: root
+      POSTGRES_PASSWORD: root
     volumes:
-      - ./db:/docker-entrypoint-initdb.d/:ro
+      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql

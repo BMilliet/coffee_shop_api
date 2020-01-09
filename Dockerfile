@@ -14,4 +14,4 @@ RUN apk update && \
 RUN pip --no-cache-dir install -r requirements.txt
 
 COPY . /app
-CMD ["python", "run.py"]
+CMD ["python", "app.py"]

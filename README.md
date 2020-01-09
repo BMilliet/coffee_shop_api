@@ -1,6 +1,6 @@
 # coffee_shop_api
 
-This is an Flask API sample
+This is a Flask API sample
 
 ### Instructions:
 requires docker and docker-compose

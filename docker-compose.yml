@@ -1,10 +1,11 @@
-version: '3'
+version: '3.5'
 
 services:
   coffee_api:
     build: .
     volumes:
       - .:/app
+    env_file: database.conf
     ports:
       - 5000:5000
     depends_on:
@@ -12,7 +13,6 @@ services:
 
   db:
     image: postgres
-    environment:
-      POSTGRES_PASSWORD: root
-    volumes:
-      - ./db/init.sql:/docker-entrypoint-initdb.d/init.sql
+    env_file: database.conf
+    ports:
+      - 5432:5432

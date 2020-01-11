@@ -3,7 +3,7 @@ import json
 from flask import request
 
 from app import app, database
-from app.models import Coffee
+from app.migration import Coffee
 
 
 def fetchAll() -> list:

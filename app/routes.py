@@ -24,3 +24,8 @@ def remove(coffee_id) -> str:
 @app.route('/edit/<coffee_id>', methods=['PATCH'])
 def edit(coffee_id) -> str:
     return controller.edit(coffee_id), 200
+
+
+@app.route('/checkout', methods=['POST'])
+def checkout() -> str:
+    return controller.checkout(), 200

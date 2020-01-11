@@ -1,6 +1,6 @@
 import json
 
-from app import app, db_manager
+from app import app, db_manager, representer
 
 
 def hello() -> str:
@@ -24,3 +24,7 @@ def remove(coffee_id) -> str:
 def edit(coffee_id) -> str:
     db_manager.edit()
     return json.dumps("Edited")
+
+
+def checkout() -> str:
+    return representer.checkout()

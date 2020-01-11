@@ -1,4 +1,4 @@
-from .models import db
+from .migration import db
 
 
 def get_all(model):

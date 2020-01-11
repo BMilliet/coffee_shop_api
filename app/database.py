@@ -2,8 +2,7 @@ from .migration import db
 
 
 def get_all(model):
-    data = model.query.all()
-    return data
+    return model.query.all()
 
 
 def add_instance(model, **kwargs):
@@ -22,6 +21,14 @@ def edit_instance(model, id, **kwargs):
     for attr, new_value in kwargs:
         setattr(instance, attr, new_value)
     commit_changes()
+
+
+def select(model, id):
+    return model.query.filter_by(id=id).all()[0]
+
+
+def select_ids(model, ids):
+    return list(select(model, id) for id in ids)
 
 
 def commit_changes():

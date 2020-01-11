@@ -8,11 +8,7 @@ from app.migration import Coffee
 
 def fetchAll() -> list:
     coffees = database.get_all(Coffee)
-    all_coffees = []
-    for coffee in coffees:
-        new_coffee = coffee.representation()
-        all_coffees.append(new_coffee)
-    return all_coffees
+    return list(coffee.representation() for coffee in coffees)
 
 
 def add() -> str:
@@ -25,6 +21,16 @@ def add() -> str:
 
 def remove(coffee_id):
     database.delete_instance(Coffee, id=coffee_id)
+
+
+def select(coffee_id):
+    coffee = database.select(Coffee, coffee_id)
+    return coffee.representation()
+
+
+def select_ids(coffee_ids):
+    selecteds = database.select_ids(Coffee, coffee_ids)
+    return list(item.representation() for item in selecteds)
 
 
 def edit(coffee_id):

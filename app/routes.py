@@ -26,6 +26,11 @@ def edit(coffee_id) -> str:
     return controller.edit(coffee_id), 200
 
 
+@app.route('/select/<coffee_id>', methods=['GET'])
+def select(coffee_id) -> str:
+    return controller.select(coffee_id), 200
+
+
 @app.route('/checkout', methods=['POST'])
 def checkout() -> str:
     return controller.checkout(), 200

@@ -1,11 +1,20 @@
-from flask_sqlalchemy import SQLAlchemy
+class CoffeeModel:
+    def __init__(self, id, name, price):
+        self.id = id
+        self.name = name
+        self.price = price
 
-db = SQLAlchemy()
+
+class Checkout:
+    def __init__(self, cart, total):
+        self.cart = cart
+        self.total = total
+
+    def representation(this) -> str:
+        return {'card': this.cart, 'total': this.total}
 
 
-class Coffee(db.Model):
-    __tablename__ = 'coffee'
-    id = db.Column(db.Integer, primary_key=True)
-    name = db.Column(db.String(100))
-    price = db.Column(db.Numeric(asdecimal=False))
-    details = db.Column(db.String(200))
+class Receipt:
+    def __init__(self, checkout, payment):
+        self.checkout = checkout
+        self.payment = payment

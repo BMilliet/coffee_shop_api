@@ -6,9 +6,14 @@ def hello() -> str:
     return 'Hello World!', 200
 
 
-@app.route('/all', methods=['GET'])
-def fetchAll() -> str:
-    return controller.fetchAll(), 200
+@app.route('/allCaffee', methods=['GET'])
+def fetchAllCaffee() -> str:
+    return controller.fetchAllCaffee(), 200
+
+
+@app.route('/allReceipt', methods=['GET'])
+def fetchAllReceipt() -> str:
+    return controller.fetchAllReceipt(), 200
 
 
 @app.route('/select/<coffee_id>', methods=['GET'])
@@ -16,9 +21,14 @@ def select(coffee_id) -> str:
     return controller.select(coffee_id), 200
 
 
-@app.route('/add', methods=['POST'])
-def add() -> str:
-    return controller.add(), 200
+@app.route('/addCoffee', methods=['POST'])
+def addCoffee() -> str:
+    return controller.addCoffee(), 200
+
+
+@app.route('/addReceipt', methods=['POST'])
+def addReceipt() -> str:
+    return controller.addReceipt(), 200
 
 
 @app.route('/checkout', methods=['POST'])

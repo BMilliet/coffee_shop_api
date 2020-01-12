@@ -7,12 +7,20 @@ def hello() -> str:
     return 'Hello World!'
 
 
-def fetchAll() -> str:
-    return json.dumps(db_manager.fetchAll())
+def fetchAllCaffee() -> str:
+    return json.dumps(db_manager.fetchAllCaffee())
+
+def fetchAllReceipt() -> str:
+    return json.dumps(db_manager.fetchAllReceipt())
 
 
-def add() -> str:
-    db_manager.add()
+def addCoffee() -> str:
+    db_manager.addCoffee()
+    return json.dumps("Added")
+
+
+def addReceipt() -> str:
+    db_manager.addReceipt()
     return json.dumps("Added")
 
 

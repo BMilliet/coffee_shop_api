@@ -1,9 +1,24 @@
 import json
 
 from flask import request
-from .serializer import *
+from .models import *
+from .db_manager import *
 
 
 def checkout() -> str:
     coffees = request.get_json(force=True)
-    return checkoutTojson(coffees)
+    coffee_list = list(select(item['id']) for item in coffees)
+    total = sum(item['price'] for item in coffee_list)
+    checkout = {'cart': coffee_list, 'total': total}
+    return json.dumps(checkout)
+
+
+def receipt() -> str:
+    data = request.get_json(force=True)
+    checkout = Checkout(cart=data['cart'], total=data['total'])
+    payment = data['form_of_payment']
+    receipt = {
+        'checkout': checkout.representation(),
+        'form_of_payment': payment
+    }
+    return json.dumps(receipt)

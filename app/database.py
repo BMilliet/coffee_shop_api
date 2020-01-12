@@ -27,9 +27,5 @@ def select(model, id):
     return model.query.filter_by(id=id).all()[0]
 
 
-def select_ids(model, ids):
-    return list(select(model, id) for id in ids)
-
-
 def commit_changes():
     db.session.commit()

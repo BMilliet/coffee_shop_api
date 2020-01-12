@@ -28,11 +28,6 @@ def select(coffee_id):
     return coffee.representation()
 
 
-def select_ids(coffee_ids):
-    selecteds = database.select_ids(Coffee, coffee_ids)
-    return list(item.representation() for item in selecteds)
-
-
 def edit(coffee_id):
     data = request.get_json(force=True)
     database.edit_instance(Coffee, id=coffee_id, price=data['price'])

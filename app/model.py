@@ -1,4 +1,5 @@
 from flask_sqlalchemy import SQLAlchemy
+from datetime import datetime
 
 db = SQLAlchemy()
 
@@ -25,11 +26,19 @@ class Receipt(db.Model):
     coffee_ids = db.Column(db.ARRAY(db.Integer))
     total = db.Column(db.Numeric(asdecimal=False))
     payment = db.Column(db.String(200))
+    date = db.Column(db.DateTime, default=datetime.now())
 
     def representation(this) -> dict:
         return {
-            "id": this.id,
-            "coffee_ids": this.coffee_ids,
-            "total": this.total,
-            "payment": this.payment
+            "id":
+            this.id,
+            "coffee_ids":
+            this.coffee_ids,
+            "total":
+            this.total,
+            "payment":
+            this.payment,
+            "date":
+            datetime.utcfromtimestamp(
+                this.date.timestamp()).strftime('%Y-%m-%d %H:%M:%S')
         }

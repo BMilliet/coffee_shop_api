@@ -1,7 +1,6 @@
 import json
 
 from flask import request
-from .models import *
 from .db_manager import *
 
 
@@ -15,7 +14,7 @@ def checkout() -> str:
 
 def receipt() -> str:
     data = request.get_json(force=True)
-    checkout = Checkout(cart=data['cart'], total=data['total'])
+    checkout = {'cart': data['cart'], 'total': data['total']}
     payment = data['form_of_payment']
     receipt = {
         'checkout': checkout.representation(),

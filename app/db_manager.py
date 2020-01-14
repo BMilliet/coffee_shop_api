@@ -3,7 +3,7 @@ import json
 from flask import request
 
 from app import app, database
-from app.migration import Coffee, Receipt
+from app.model import Coffee, Receipt
 
 
 def fetchAllCaffee() -> list:
@@ -28,7 +28,7 @@ def addReceipt() -> str:
     data = request.get_json(force=True)
     database.add_instance(Receipt,
                           coffee_ids=list(
-                              item['id'] for item in data['checkout']['card']),
+                              item['id'] for item in data['checkout']['cart']),
                           total=data['checkout']['total'],
                           payment=data['form_of_payment'])
 

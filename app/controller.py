@@ -7,8 +7,18 @@ def hello() -> str:
     return 'Hello World!'
 
 
+def endpoints() -> str:
+    return json.dumps({
+        'endpoints': [
+            '/allCaffee', '/allReceipt', '/select/1', '/addCoffee',
+            '/addReceipt', '/checkout', '/receipt', '/remove/1', '/edit/1'
+        ]
+    })
+
+
 def fetchAllCaffee() -> str:
     return json.dumps(db_manager.fetchAllCaffee())
+
 
 def fetchAllReceipt() -> str:
     return json.dumps(db_manager.fetchAllReceipt())

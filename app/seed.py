@@ -1,5 +1,5 @@
 from . import database
-from .migration import Coffee
+from .model import Coffee
 
 
 def populate_db():

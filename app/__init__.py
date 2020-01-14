@@ -1,6 +1,6 @@
 from flask import Flask
 
-from .migration import db
+from .model import db
 from . import config, seed
 
 app = Flask(__name__)

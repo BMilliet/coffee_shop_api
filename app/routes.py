@@ -6,6 +6,11 @@ def hello() -> str:
     return 'Hello World!', 200
 
 
+@app.route('/endpoints', methods=['GET'])
+def endpoints() -> str:
+    return controller.endpoints(), 200
+
+
 @app.route('/allCaffee', methods=['GET'])
 def fetchAllCaffee() -> str:
     return controller.fetchAllCaffee(), 200
